@@ -5,8 +5,8 @@ my $build = new Module::Build (
 	license => 'perl',
 	requires => {
 		'perl'		 => '5.8',
-		'Crypt::Twofish' => '0',
-		'Digest::SHA'	 => '0',
+		'Crypt::Twofish' => '0.1',
+		'Digest::SHA'	 => '0.1',
 	},
 );
 $build->create_build_script;

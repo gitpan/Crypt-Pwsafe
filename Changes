@@ -1,5 +1,8 @@
 Revision history for Crypt-Pwsafe
 
+1.001 2006/09/30
+	Added Crypt::Twofish and Digest::SHA as prerequisite in Makefile.PL
+
 1    2006/09/20
         First version, released on an unsuspecting world.
 

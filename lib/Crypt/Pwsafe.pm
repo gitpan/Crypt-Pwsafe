@@ -21,11 +21,11 @@ if ($@) { $CIPHER .= "_PP"; eval "use $CIPHER" }
 
 =head1 VERSION
 
-Version 1
+Version 1.001
 
 =cut
 
-our $VERSION = '1';
+our $VERSION = '1.001';
 
 =head1 SYNOPSIS
 
