@@ -8,7 +8,4 @@ examples/pwlist.pl
 lib/Crypt/Pwsafe.pm
 t/00-load.t
 t/10-test-file.t
-t/boilerplate.t
-t/pod-coverage.t
-t/pod.t
 t/test.psafe3

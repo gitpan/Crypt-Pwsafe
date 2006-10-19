@@ -1,5 +1,8 @@
 Revision history for Crypt-Pwsafe
 
+1.002 2006/10/06
+	Removed pod test files
+
 1.001 2006/09/30
 	Added Crypt::Twofish and Digest::SHA as prerequisite in Makefile.PL
 

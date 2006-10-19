@@ -1,6 +1,6 @@
 ---
 name: Crypt-Pwsafe
-version: 1.001
+version: 1.002
 author:
   - 'Shufeng Tan <shufengtan@gmail.com>'
 abstract: Perl extension for decrypting and parsing PasswordSafe V3 data files
@@ -14,7 +14,7 @@ requires:
 provides:
   Crypt::Pwsafe:
     file: lib/Crypt/Pwsafe.pm
-    version: 1.001
+    version: 1.002
 generated_by: Module::Build version 0.2805
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
