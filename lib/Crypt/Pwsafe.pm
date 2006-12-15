@@ -25,7 +25,9 @@ Version 1.002
 
 =cut
 
-our $VERSION = '1.002';
+our $VERSION = '1.1';
+
+our $DEBUG = 0;
 
 =head1 SYNOPSIS
 
@@ -160,7 +162,8 @@ sub _cbc_twofish {
 	my $plain = "";
 	my $pwsafe = {};
 	my $crypt_len = length($crypt);
-	my ($group, $entry, $title, $user);
+	my ($group, $title, $user);
+	my $entry = {};
 	while($ptr < $crypt_len) {
 		my $curr_plain = $chain_blocks->();
 		# Passwordsafe uses little-endian
@@ -183,15 +186,17 @@ sub _cbc_twofish {
 		$plain .= $buf;
 		#print unpack("H*", $buf), "\n";
 		if ($type == 1) { # UUID
-			$entry = {UUID => unpack("H*", $buf)};
-			$title = undef;
-			$user  = undef;
+			$entry->{UUID} = unpack("H*", $buf);
+			print "\tUUID=$entry->{UUID}\n" if $DEBUG;
 		} elsif ($type == 2) {    # Group
 			$group = pack("U0C*", unpack("C*", $buf));
+			print "Group=$group\n" if $DEBUG;
 		} elsif ($type == 3) {    # Title
 			$title = pack("U0C*", unpack("C*", $buf));
+			print "  Title=$title\n" if $DEBUG;
 		} elsif ($type == 4) {    # Username
 			$user  = pack("U0C*", unpack("C*", $buf));
+			print "    User=$user\n" if $DEBUG;
 		} elsif ($type == 0xff) { # End of Entry
 			if (defined($title) and defined($user)) {
 				if (exists $pwsafe->{$group}) {
@@ -202,6 +207,8 @@ sub _cbc_twofish {
 			} else {
 				$pwsafe->{$group} = { dummy => $entry};
 			}
+			($group, $title, $user) = (undef, undef, undef);
+			$entry = {};
 		} else {
 			my $descr = $FieldType{$type};
 			$descr = "Type$type" unless defined $descr;
@@ -212,6 +219,7 @@ sub _cbc_twofish {
 				$value = pack("U0C*", unpack("C*", $buf));
 			}
 			$entry->{$descr} = $value;
+			print "\t$descr=$value\n" if $DEBUG;
 		}
 	}
 	my $hmac = Digest::SHA::hmac_sha256($plain, $hmac_key);

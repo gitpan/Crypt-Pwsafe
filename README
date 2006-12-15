@@ -3,12 +3,13 @@ NAME
     V3 data files
 
 VERSION
-    Version 1
+    Version 1.1
 
 SYNOPSIS
-    use Crypt::Pwsafe; my $file = 'pwsafe.psafe3'; my $key =
-    Crypt::Pwsafe::enter_combination(); my $pwsafe =
-    Crypt::Pwsafe->new($file, $key);
+    use Crypt::Pwsafe;
+    my $file = 'pwsafe.psafe3';
+    my $key = Crypt::Pwsafe::enter_combination();
+    my $pwsafe = Crypt::Pwsafe->new($file, $key);
 
     # The password for 'user' at 'host' computer in 'Test group'
 
