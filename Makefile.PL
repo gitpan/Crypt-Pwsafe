@@ -11,7 +11,8 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
 	'Crypt::Twofish' => 0.1,
-	'Digest::SHA' => 0.1
+	'Digest::SHA' => 0.1,
+	'Term::ReadKey' => 0.1,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Crypt-Pwsafe-*' },

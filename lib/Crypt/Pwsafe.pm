@@ -11,6 +11,8 @@ use warnings;
 use strict;
 
 use FileHandle;
+use Term::ReadKey;  # comment me out
+#use autouse Term::ReadKey;
 my $SHA = "Digest::SHA";
 eval "use $SHA";
 if ($@) { $SHA .= "::PurePerl"; eval "use $SHA" }
@@ -21,11 +23,11 @@ if ($@) { $CIPHER .= "_PP"; eval "use $CIPHER" }
 
 =head1 VERSION
 
-Version 1.002
+Version 1.2
 
 =cut
 
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 our $DEBUG = 0;
 
@@ -242,11 +244,12 @@ sub _stretch_key {
 
 sub enter_combination {
 	print "Enter password safe combination: ";
-	system(qw(stty -echo));
+	local $SIG{__DIE__} = { ReadMode 0 };
+	ReadMode 2;
 	my $pass = <STDIN>;
-	system(qw(stty echo));
-	print "\n";
+	ReadMode 0;
 	chomp($pass);
+	print "\n";
 	return $pass;
 }
 
